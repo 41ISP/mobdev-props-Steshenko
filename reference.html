@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bella Vita — Итальянский ресторан</title>
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                color: #2b241d;
+                background: #fdf9f4;
+                line-height: 1.5;
+            }
+
+            .container {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 24px;
+                text-align: center;
+            }
+
+            /* ---------- BUTTONS ---------- */
+            .btn {
+                display: inline-block;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 22px;
+                font-size: 15px;
+                cursor: pointer;
+                transition: opacity 0.2s ease;
+            }
+            .btn:hover {
+                opacity: 0.85;
+            }
+
+            .btn--primary {
+                background: #c0392b;
+                color: #fff;
+            }
+
+            .btn--outline {
+                background: transparent;
+                color: #c0392b;
+                border: 1px solid #c0392b;
+            }
+
+            .btn--full {
+                width: 100%;
+                margin-top: 12px;
+            }
+
+            /* ---------- HEADER ---------- */
+            .header {
+                background: #fff;
+                border-bottom: 1px solid #eee1d3;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+            .header__inner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 72px;
+            }
+
+            .logo {
+                font-size: 22px;
+                font-weight: 700;
+                font-style: italic;
+            }
+            .logo span {
+                color: #c0392b;
+            }
+            .logo--light {
+                color: #fff;
+            }
+            .logo--light span {
+                color: #e8a598;
+            }
+
+            .nav {
+                display: flex;
+                gap: 28px;
+            }
+
+            .nav__link {
+                text-decoration: none;
+                color: #2b241d;
+                font-size: 15px;
+            }
+            .nav__link:hover {
+                color: #c0392b;
+            }
+
+            /* ---------- HERO ---------- */
+            .hero {
+                background: linear-gradient(135deg, #c0392b, #e07856);
+                color: #fff;
+                padding: 80px 0;
+            }
+
+            .hero__inner {
+                text-align: center;
+            }
+
+            .hero__title {
+                font-size: 40px;
+                margin-bottom: 16px;
+            }
+
+            .hero__subtitle {
+                font-size: 18px;
+                max-width: 560px;
+                margin: 0 auto 28px;
+                opacity: 0.9;
+            }
+
+            /* ---------- MENU ---------- */
+            .menu {
+                padding: 64px 0;
+            }
+
+            .menu__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+
+            .dish-card {
+                background: #fff;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .dish-card__image {
+                width: 100%;
+                height: 160px;
+                object-fit: cover;
+            }
+
+            .dish-card__body {
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+
+            .dish-card__category {
+                font-size: 12px;
+                text-transform: uppercase;
+                color: #c0392b;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .dish-card__title {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+
+            .dish-card__meta {
+                font-size: 13px;
+                color: #7a6f61;
+                margin-bottom: 14px;
+            }
+
+            .dish-card__footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+            }
+
+            .dish-card__price {
+                font-weight: 700;
+                font-size: 16px;
+            }
+
+            .dish-card__rating {
+                color: #f5a623;
+                font-size: 14px;
+            }
+
+            /* ---------- REVIEWS ---------- */
+            .reviews {
+                background: #f3e9dd;
+                padding: 64px 0;
+            }
+
+            .reviews__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+
+            .review-card {
+                background: #fff;
+                border-radius: 12px;
+                padding: 20px;
+                display: flex;
+                gap: 14px;
+            }
+
+            .review-card__avatar {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+
+            .review-card__text {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            .review-card__author {
+                font-size: 13px;
+                color: #7a6f61;
+            }
+
+            /* ---------- FOOTER ---------- */
+            .footer {
+                background: #2b241d;
+                color: #d9cfc2;
+                padding: 48px 0 0;
+            }
+
+            .footer__inner {
+                display: flex;
+                justify-content: space-between;
+                gap: 40px;
+                padding-bottom: 32px;
+            }
+
+            .footer__col {
+                flex: 1;
+            }
+
+            .footer__title {
+                color: #fff;
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+
+            .footer__text {
+                font-size: 14px;
+                margin-bottom: 6px;
+                color: #b3a795;
+            }
+
+            .footer__link {
+                display: block;
+                color: #d9cfc2;
+                text-decoration: none;
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            .footer__link:hover {
+                color: #fff;
+            }
+
+            .footer__bottom {
+                border-top: 1px solid #453b2f;
+                text-align: center;
+                padding: 16px 0;
+                font-size: 13px;
+            }
+
+            /* ---------- RESPONSIVE ---------- */
+            @media (max-width: 768px) {
+                .menu__grid,
+                .reviews__grid {
+                    grid-template-columns: 1fr;
+                }
+                .nav {
+                    display: none;
+                }
+                .footer__inner {
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ==================== HEADER ==================== -->
+        <header class="header">
+            <div class="container header__inner">
+                <div class="logo">
+                    Bella
+                    <span>Vita</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav__link">Меню</a>
+                    <a href="#" class="nav__link">О нас</a>
+                    <a href="#" class="nav__link">Отзывы</a>
+                    <a href="#" class="nav__link">Контакты</a>
+                </nav>
+                <button class="btn btn--outline">Забронировать столик</button>
+            </div>
+        </header>
+
+        <!-- ==================== HERO ==================== -->
+        <section class="hero">
+            <div class="container hero__inner">
+                <h1 class="hero__title">
+                    Настоящая итальянская кухня
+                    <br />
+                    в сердце города
+                </h1>
+                <p class="hero__subtitle">
+                    Свежие продукты, семейные рецепты и атмосфера тёплого вечера
+                    в Тоскане
+                </p>
+                <button class="btn btn--primary">Смотреть меню</button>
+            </div>
+        </section>
+
+        <!-- ==================== MENU ==================== -->
+        <section class="menu">
+            <div class="container">
+                <h2 class="section-title">Наше меню</h2>
+                <div class="menu__grid">
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Margherita"
+                            alt="Пицца Маргарита" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">Пицца</span>
+                            <h3 class="dish-card__title">Маргарита</h3>
+                            <p class="dish-card__meta">
+                                330 г · Вегетарианское
+                            </p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">590 ₽</span>
+                                <span class="dish-card__rating">★ 4.9</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Carbonara"
+                            alt="Паста Карбонара" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">Паста</span>
+                            <h3 class="dish-card__title">Карбонара</h3>
+                            <p class="dish-card__meta">280 г · Классика</p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">490 ₽</span>
+                                <span class="dish-card__rating">★ 4.8</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Tiramisu"
+                            alt="Тирамису" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">Десерт</span>
+                            <h3 class="dish-card__title">Тирамису</h3>
+                            <p class="dish-card__meta">150 г · С кофе</p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">350 ₽</span>
+                                <span class="dish-card__rating">★ 4.9</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Bruschetta"
+                            alt="Брускетта" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">Закуски</span>
+                            <h3 class="dish-card__title">
+                                Брускетта с томатами
+                            </h3>
+                            <p class="dish-card__meta">
+                                180 г · Вегетарианское
+                            </p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">290 ₽</span>
+                                <span class="dish-card__rating">★ 4.6</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Risotto"
+                            alt="Ризотто с грибами" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">
+                                Основные блюда
+                            </span>
+                            <h3 class="dish-card__title">Ризотто с грибами</h3>
+                            <p class="dish-card__meta">320 г · Острое</p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">560 ₽</span>
+                                <span class="dish-card__rating">★ 4.7</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="dish-card">
+                        <img
+                            class="dish-card__image"
+                            src="https://placehold.co/400x220?text=Panna+Cotta"
+                            alt="Панна-котта" />
+                        <div class="dish-card__body">
+                            <span class="dish-card__category">Десерт</span>
+                            <h3 class="dish-card__title">Панна-котта</h3>
+                            <p class="dish-card__meta">
+                                140 г · С ягодным соусом
+                            </p>
+                            <div class="dish-card__footer">
+                                <span class="dish-card__price">320 ₽</span>
+                                <span class="dish-card__rating">★ 4.8</span>
+                            </div>
+                            <button class="btn btn--primary btn--full">
+                                В корзину
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== REVIEWS ==================== -->
+        <section class="reviews">
+            <div class="container">
+                <h2 class="section-title">Отзывы гостей</h2>
+                <div class="reviews__grid">
+                    <div class="review-card">
+                        <img
+                            class="review-card__avatar"
+                            src="https://placehold.co/64x64?text=E"
+                            alt="Елена" />
+                        <div class="review-card__content">
+                            <p class="review-card__text">
+                                Лучшая карбонара в городе, атмосфера очень
+                                уютная, обязательно вернёмся.
+                            </p>
+                            <span class="review-card__author">
+                                Елена В. — блюдо «Карбонара»
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <img
+                            class="review-card__avatar"
+                            src="https://placehold.co/64x64?text=I"
+                            alt="Игорь" />
+                        <div class="review-card__content">
+                            <p class="review-card__text">
+                                Заказывали пиццу на компанию, все были в
+                                восторге от теста и начинки.
+                            </p>
+                            <span class="review-card__author">
+                                Игорь Т. — блюдо «Маргарита»
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <img
+                            class="review-card__avatar"
+                            src="https://placehold.co/64x64?text=O"
+                            alt="Ольга" />
+                        <div class="review-card__content">
+                            <p class="review-card__text">
+                                Тирамису просто тает во рту, а обслуживание — на
+                                высшем уровне.
+                            </p>
+                            <span class="review-card__author">
+                                Ольга Н. — блюдо «Тирамису»
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FOOTER ==================== -->
+        <footer class="footer">
+            <div class="container footer__inner">
+                <div class="footer__col">
+                    <div class="logo logo--light">
+                        Bella
+                        <span>Vita</span>
+                    </div>
+                    <p class="footer__text">
+                        Итальянский ресторан в самом центре города с 2012 года
+                    </p>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">Разделы</h4>
+                    <a href="#" class="footer__link">Меню</a>
+                    <a href="#" class="footer__link">О нас</a>
+                    <a href="#" class="footer__link">Отзывы</a>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__title">Контакты</h4>
+                    <p class="footer__text">Ежедневно 11:00–23:00</p>
+                    <p class="footer__text">+7 (999) 765-43-21</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>© 2026 Bella Vita. Все права защищены.</p>
+            </div>
+        </footer>
+    </body>
+</html>
